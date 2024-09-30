@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .weather-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+        select, button {
+            padding: 10px;
+            width: 80%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .weather-info {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="weather-container">
+        <h1>Weather App</h1>
+        <select id="locationSelect">
+            <option value="">Select a location</option>
+            <option value="New York">New York</option>
+            <option value="London">London</option>
+            <option value="Tokyo">Tokyo</option>
+            <option value="Sydney">Sydney</option>
+            <option value="Paris">Paris</option>
+            <option value="Berlin">Berlin</option>
+            <option value="Moscow">Moscow</option>
+            <option value="Rio de Janeiro">Rio de Janeiro</option>
+        </select>
+        <button id="getWeatherBtn">Get Weather</button>
+        <div class="weather-info" id="weatherInfo"></div>
+    </div>
+
+    <script>
+        // Static weather data for demonstration
+        const weatherData = {
+            "New York": {
+                temperature: 22,
+                condition: "Sunny",
+                wind: 5,
+                humidity: 50
+            },
+            "London": {
+                temperature: 15,
+                condition: "Cloudy",
+                wind: 10,
+                humidity: 70
+            },
+            "Tokyo": {
+                temperature: 28,
+                condition: "Rainy",
+                wind: 7,
+                humidity: 80
+            },
+            "Sydney": {
+                temperature: 18,
+                condition: "Windy",
+                wind: 15,
+                humidity: 60
+            },
+            "Paris": {
+                temperature: 20,
+                condition: "Sunny",
+                wind: 8,
+                humidity: 55
+            },
+            "Berlin": {
+                temperature: 16,
+                condition: "Rainy",
+                wind: 12,
+                humidity: 75
+            },
+            "Moscow": {
+                temperature: 10,
+                condition: "Snowy",
+                wind: 4,
+                humidity: 85
+            },
+            "Rio de Janeiro": {
+                temperature: 30,
+                condition: "Sunny",
+                wind: 10,
+                humidity: 60
+            }
+        };
+
+        const getWeatherBtn = document.getElementById('getWeatherBtn');
+        const weatherInfo = document.getElementById('weatherInfo');
+
+        getWeatherBtn.addEventListener('click', () => {
+            const location = document.getElementById('locationSelect').value;
+            displayWeatherData(location);
+        });
+
+        function displayWeatherData(location) {
+            const data = weatherData[location];
+            if (data) {
+                weatherInfo.innerHTML = `
+                    <h2>${location}</h2>
+                    <p>Temperature: ${data.temperature}°C</p>
+                    <p>Condition: ${data.condition}</p>
+                    <p>Wind: ${data.wind} km/h</p>
+                    <p>Humidity: ${data.humidity}%</p>
+                `;
+            } else {
+                weatherInfo.innerHTML = `<p>Please select a location.</p>`;
+            }
+        }
+    </script>
+
+</body>
+</html>
